@@ -15,16 +15,39 @@ app.use(session({
   saveUninitialized: true
 }))
 
+
 app.use(bodyParser.urlencoded({ extended: false }))
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views','./views')
 app.set('view engine','mustache')
 
+
+function isAuthenticated(req,res,next) {
+  if (req.session.username) {
+    next()
+  }
+  else {
+    res.redirect('/login')
+  }
+}
+
 //     Users      //
 
 
-app.post('/register', (req,res) => {
-  res.redirect('/register')
+app.post('/login', (req,res) => {
+  models.User.findOne({
+    where: {
+      username: req.body.username,
+      password: req.body.password
+    }
+  }).then(function(user) {
+    if (user){
+      req.session.username = user.username
+      res.redirect('/home')
+    } else {
+     res.render('login', {Message: "Invalid Credentials!"})
+    }
+  })
 })
 
 app.post('/registration', (req,res) => {
@@ -39,6 +62,14 @@ app.post('/registration', (req,res) => {
     console.log(newUser)
   })
   res.redirect('/login')
+})
+
+app.post('/login', (req, res) => {
+  res.redirect('/home')
+})
+
+app.get('/home', isAuthenticated, (req,res) => {
+  res.render('home')
 })
 
 // app.post('/login', (req,res) => {
@@ -84,5 +115,5 @@ app.get('/register',(req,res) => {
 // Listen for server //
 
 app.listen(3000,() => {
-console.log("Sever is online...")
+console.log("Server is online...")
 })
