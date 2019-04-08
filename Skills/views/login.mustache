@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+  </head>
+  <body>
+
+
+  <h2> Please login or register </h2>
+
+  <div>
+    <form action="/login" method="POST">
+      <input type="text" name="username" placeholder="user name" />
+      <input type="password" name="password" placeholder="password" />
+      <button type="submit">Login</button>
+    </form>
+    <form action="/register" method="POST">
+      <p> If this is your first time visiting Skillz Not Billz please create an account by registering below! </p>
+    <button type="submit">Register</button>
+    </form>
+  </div>
+
+  <br><br>
+
+  {{message}}
+
+  </body>
+</html>
