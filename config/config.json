@@ -1,9 +1,9 @@
 {
   "development": {
-    "username": "vagzimuo",
-    "password": "Kt5kLwoVDkBLGPN2x5TGp8guHhQePUuy",
-    "database": "postgres",
-    "host": "127.0.0.1",
+    "username": "wgwzhhyz",
+    "password": "B_KnINgA9RuGmGCHUgnq-EO3n8vOOTss",
+    "database": "wgwzhhyz",
+    "host": "isilo.db.elephantsql.com",
     "dialect": "postgres"
   },
   "test": {
