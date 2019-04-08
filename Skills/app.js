@@ -5,6 +5,8 @@ const path = require('path')
 var session = require('express-session')
 const app = express()
 const models = require('./models')
+const bcrypt = require('bcrypt')
+const saltRounds = 10
 
 const VIEWS_PATH= path.join(__dirname, '/views');
 console.log(VIEWS_PATH)
@@ -31,9 +33,6 @@ function isAuthenticated(req,res,next) {
   }
 }
 
-//     Users      //
-
-
 app.post('/login', (req,res) => {
   models.User.findOne({
     where: {
@@ -51,11 +50,13 @@ app.post('/login', (req,res) => {
 })
 
 app.post('/registration', (req,res) => {
+  bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
+    console.log(hash)
 
   let user = models.User.build({
     username: req.body.username,
     email: req.body.email,
-    password: req.body.password,
+    password: hash,
     city: req.body.city
   })
   user.save().then(function(newUser){
@@ -63,46 +64,16 @@ app.post('/registration', (req,res) => {
   })
   res.redirect('/login')
 })
+})
 
-app.post('/login', (req, res) => {
-  res.redirect('/home')
+app.post('/register', (req,res) =>{
+  res.redirect('/register')
+
 })
 
 app.get('/home', isAuthenticated, (req,res) => {
   res.render('home')
 })
-
-// app.post('/login', (req,res) => {
-//   let username = req.body.username
-//   let password = req.body.password
-//
-//   let user = {username: username, password: password, userTrips: []}
-//
-//     persistedUser = users.find((user) => {
-//     return user.username == username && user.password == password
-//   })
-//
-//   if(persistedUser) {
-//     if(req.session) {
-//       req.session.username = persistedUser.username
-//       res.redirect('/**')
-//     }
-//   } else {
-//     res.render('login', {message: 'The User Name or Password is incorrect. Please try again!'})
-//   }
-// })
-//
-// app.post('/logout', (req,res) => {
-//   req.session.destroy(function(err) {
-//     if(err) {
-//       console.log(err)
-//     } else {
-//       res.redirect('/login')
-//     }
-//   })
-// })
-
-
 
 app.get('/login', (req,res) => {
   res.render('login')
