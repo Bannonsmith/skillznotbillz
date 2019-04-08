@@ -1,7 +1,6 @@
 {
   "name": "skills",
   "version": "1.0.0",
-  "description": "",
   "main": "index.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1"
@@ -15,5 +14,6 @@
     "mustache-express": "^1.2.8",
     "pg": "^7.9.0",
     "sequelize": "^5.2.13"
-  }
+  },
+  "description": ""
 }
