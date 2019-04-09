@@ -87,7 +87,33 @@ app.post('/register',  (req,res) =>{
 
 })
 
+<<<<<<< HEAD
+
+// Gets //
+
+app.get('/trade', (req, res) =>{
+  models.Category.findAll().then(function(categories) {
+    res.render('trade', {categories: categories})
+  })
+})
+
+app.get('/tradeAT/:id', (req,res) => {
+  let id = req.params.id
+  let category = req.params.name
+  models.Description.findAll({
+    where: {
+      categoryId: id,
+    }
+  }).then(function(description) {
+
+     res.render('trade', {description: description}, {categories: categories})
+  })
+})
+
 app.get('/home', isAuthenticated, (req,res) => {
+=======
+app.get('/home', isAuthenticated, (req,res) => {
+>>>>>>> master
   res.render('home')
 })
 
