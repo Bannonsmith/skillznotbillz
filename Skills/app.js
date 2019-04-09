@@ -35,30 +35,36 @@ app.set('view engine','mustache')
 
 app.post('/login', (req,res) => {
 
-
+  console.log(req.body)
   let username = req.body.username
   let password = req.body.password
+
+  console.log(username)
 
   models.User.findOne({
     where: {
       username: username
     }
-  }).then((user) => {
-    console.log(user.password)
-    if (user) {
-      console.log(user)
-      bcrypt.compare(password, user.password,(error,result) => {
-        if (result) {
-          res.redirect('/home')
+  }).then(function(user) {
+    console.log(user)
+    if (user === null) {
+      res.render("login", {message: "Invalid username or password!"})
+    }
+      else {
+        bcrypt.compare(password, user.password,(error,result) => {
+          if (result) {
+            if (req.session){
+              req.session.user = user.dataValues
+          }
+          res.render('home', {'user' : user})
+
         } else {
           res.render("login", {message: "Invalid username or password!"})
         }
       })
     }
-  }).catch(() => {
-    res.render("login", {message: "Invalid username or password" })
   })
-  })
+})
 
 app.post('/registration', (req,res) => {
   bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
