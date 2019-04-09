@@ -6,47 +6,15 @@
 
 
 {{#categories}}
-  <form action="/tradeAT/{{id}}" method="GET">
+  <form action="/tradeSkill/{{id}}" method="GET">
     <button type="submit">{{name}}</button>
   </form>
 {{/categories}}
 
-<!-- <form action="/trades" method="POST">
-<button type="submit">Animal Training</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Automotive</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Beauty(Hair/Makeup)</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Culinary Arts</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Fine Arts</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Household Maintenance</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Landscaping/Gardening</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Performing Arts/Music</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Sports/Exercise</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Technology</button>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Other</button>
-</form> -->
-
 {{#description}}
+{{#categories}}
 {{name}}
+{{/categories}}
 {{body}}
 {{/description}}
 </body>
