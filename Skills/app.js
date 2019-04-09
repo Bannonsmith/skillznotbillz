@@ -88,9 +88,11 @@ app.post('/register',  (req,res) =>{
 })
 
 app.get('/home', isAuthenticated, (req,res) => {
-  res.render('home')
+  models.Category.findAll().then((categories) => {
+    console.log(categories)
+    res.render('home', {categories: categories})
+  })
 })
-
 app.get('/trade', isAuthenticated, (req,res) => {
   res.render('trade')
 })
