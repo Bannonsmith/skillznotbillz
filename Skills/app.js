@@ -24,14 +24,14 @@ app.set('views','./views')
 app.set('view engine','mustache')
 
 
-// function isAuthenticated(req,res,next) {
-//   if (req.session.username) {
-//     next()
-//   }
-//   else {
-//     res.redirect('/login')
-//   }
-// }
+function isAuthenticated(req,res,next) {
+  if (req.session.user) {
+    next()
+  }
+  else {
+    res.redirect('/login')
+  }
+}
 
 app.post('/login', (req,res) => {
 
@@ -82,20 +82,24 @@ app.post('/registration', (req,res) => {
 })
 })
 
-app.post('/register', (req,res) =>{
+app.post('/register',  (req,res) =>{
   res.redirect('/register')
 
 })
 
-app.get('/home', (req,res) => {
+app.get('/home', isAuthenticated, (req,res) => {
   res.render('home')
+})
+
+app.get('/trade', isAuthenticated, (req,res) => {
+  res.render('trade')
 })
 
 app.get('/login', (req,res) => {
   res.render('login')
 })
 
-app.get('/register',(req,res) => {
+app.get('/register', (req,res) => {
   res.render('register')
 })
 
