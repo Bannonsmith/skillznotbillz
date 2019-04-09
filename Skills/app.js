@@ -103,6 +103,13 @@ app.post('/register', (req,res) =>{
 
 })
 
+//users page
+
+app.get('/user', (req,res) =>{
+  res.render('user')
+
+})
+
 app.get('/home', isAuthenticated, (req,res) => {
   res.render('home')
 })
