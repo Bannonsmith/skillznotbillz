@@ -34,24 +34,50 @@ function isAuthenticated(req,res,next) {
 }
 
 app.post('/login', (req,res) => {
+
+
+  let username = req.body.username
+  let password = req.body.password
+
   models.User.findOne({
     where: {
-      username: req.body.username,
-      password: req.body.password
+      username: username
     }
-  }).then(function(user) {
-    if (user){
-      req.session.username = user.username
-      res.redirect('/home')
-    } else {
-     res.render('login', {Message: "Invalid Credentials!"})
+  }).then((user) => {
+    console.log(user.password)
+    if (user) {
+      console.log(user)
+      bcrypt.compare(password, user.password,(error,result) => {
+        if (result) {
+          res.render('home')
+        } else {
+          res.render("login", {message: "Invalid username or password!"})
+        }
+      })
     }
+  }).catch(() => {
+    res.render("login", {message: "Invalid username or password" })
   })
-})
-
+  })
+//   models.User.findOne({
+//     where: {
+//       username: req.body.username,
+//       password: hash
+//     }
+//   }).then(function(user) {
+//     if (user){
+//       req.session.username = user.username
+//       res.redirect('/home')
+//     } else {
+//      res.render('login', {Message: "Invalid Credentials!"})
+//      console.log(hash)
+//
+//     }
+//   })
+// })
+// })
 app.post('/registration', (req,res) => {
   bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
-    console.log(hash)
 
   let user = models.User.build({
     username: req.body.username,
