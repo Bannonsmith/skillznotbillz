@@ -24,14 +24,14 @@ app.set('views','./views')
 app.set('view engine','mustache')
 
 
-function isAuthenticated(req,res,next) {
-  if (req.session.username) {
-    next()
-  }
-  else {
-    res.redirect('/login')
-  }
-}
+// function isAuthenticated(req,res,next) {
+//   if (req.session.username) {
+//     next()
+//   }
+//   else {
+//     res.redirect('/login')
+//   }
+// }
 
 app.post('/login', (req,res) => {
 
@@ -65,23 +65,7 @@ app.post('/login', (req,res) => {
     }
   })
 })
-//   models.User.findOne({
-//     where: {
-//       username: req.body.username,
-//       password: hash
-//     }
-//   }).then(function(user) {
-//     if (user){
-//       req.session.username = user.username
-//       res.redirect('/home')
-//     } else {
-//      res.render('login', {Message: "Invalid Credentials!"})
-//      console.log(hash)
-//
-//     }
-//   })
-// })
-// })
+
 app.post('/registration', (req,res) => {
   bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
 
@@ -103,7 +87,7 @@ app.post('/register', (req,res) =>{
 
 })
 
-app.get('/home', isAuthenticated, (req,res) => {
+app.get('/home', (req,res) => {
   res.render('home')
 })
 
