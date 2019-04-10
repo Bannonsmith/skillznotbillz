@@ -31,23 +31,21 @@ If you havent created a profile click the button below
 
  <br>
  <br>
+ <form class="" action="/add-skill" method="post">
+
 {{#categories}}
-<!-- <form class="" action="/home" method="post" name=""> -->
-  <input type="hidden" name="category" value="{{id}}">
-  <input type="radio" name="category"/>{{name}}
-<!-- </form> -->
-
+  <!-- <input type="hidden" name="category" value="{{id}}"> -->
+  <input type="radio" name="category" value = '{{id}}'>{{name}}
 {{/categories}}
-
-<br>
-<br>
-<br>
-
-your skill
-<form class="" action="/add-skill" method="post">
-  <input type="text" name="description" value="" placeholder="description">
-  <button type="submit" name="button">submit</button>
+<input type="text" name="description" value="" placeholder="description">
+<button type="submit" name="button">submit</button>
 </form>
+
+<br>
+<br>
+<br>
+
+
 
 
 
