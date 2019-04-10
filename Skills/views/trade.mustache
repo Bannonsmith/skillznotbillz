@@ -2,20 +2,25 @@
 <head>
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
+
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
+  <link rel="stylesheet" type="text/css" href="/style.css">
+
 </head>
 
-
 <body>
+  {{> header}}
+<div id="tradeheader">
+<br>
 <h1>Make a Trade</h1>
 <h2>Select the category of skill that you would like to learn.</h2>
+</div>
 
-
+<div id="tradebuttonbox">
 {{#categories}}
-  <form action="/tradeSkill/{{id}}" method="GET">
-    <button type="submit">{{name}}</button>
-  </form>
+  <a href="/tradeSkill/{{id}}"><button type="button" id="tradebutton" class="btn btn-outline-info" >{{name}}</button></a>
 {{/categories}}
+</div>
 
 {{#description}}
 <div class="row">

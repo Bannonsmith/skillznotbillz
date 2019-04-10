@@ -110,7 +110,7 @@ app.post('/register',  (req,res) =>{
 })
 
 
-// Gets //
+// Trade Page //
 
 app.get('/trade', isAuthenticated, (req, res) =>{
   models.Category.findAll().then(function(categories) {
@@ -119,7 +119,9 @@ app.get('/trade', isAuthenticated, (req, res) =>{
 })
 
 app.get('/tradeSkill/:id', (req,res) => {
+  console.log(req.params, 'parammmms')
   let id = req.params.id
+
   models.Category.findAll().then(function(categories) {
     models.Description.findAll({
       where : {
@@ -135,6 +137,10 @@ app.get('/tradeSkill/:id', (req,res) => {
     })
   })
 })
+
+
+// ?? //
+
 
 
 
@@ -164,12 +170,24 @@ app.get('/trade', isAuthenticated, (req,res) => {
 app.get('/login', (req,res) => {
   res.render('login')
 })
+
 //users page
 
 app.get('/user', (req,res) =>{
-        res.render('user')
+  // let id = req.params.userId
+  //
+  // models.Category.findAll().then(function(categories) {
+  //   models.Description.findAll(){
+  //     where: {
+  //       userId: id
+  //     }
+  //   }
+  // })
 
-        })
+
+  res.render('user')
+
+})
 
 app.get('/register', (req,res) => {
   res.render('register')
