@@ -54,7 +54,6 @@ app.post ('/add-skill', (req, res) => {
   res.redirect("/user")
 })
 
-=======
 // Posts //
 
 app.post('/login', (req,res) => {
