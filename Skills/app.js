@@ -10,6 +10,7 @@ const saltRounds = 10
 
 const VIEWS_PATH= path.join(__dirname, '/views');
 // console.log(VIEWS_PATH)
+console.log(VIEWS_PATH)
 
 app.use(session({
   secret: 'keyboard cat',
@@ -37,7 +38,6 @@ function isAuthenticated(req,res,next) {
   }
 }
 
-<<<<<<< HEAD
 app.post ('/add-skill', (req, res) => {
   let description = req.body.body
   let userId = req.body.id
@@ -56,7 +56,6 @@ app.post ('/add-skill', (req, res) => {
 
 =======
 // Posts //
->>>>>>> master
 
 app.post('/login', (req,res) => {
 
@@ -154,6 +153,12 @@ app.get('/trade', isAuthenticated, (req,res) => {
 app.get('/login', (req,res) => {
   res.render('login')
 })
+//users page
+
+app.get('/user', (req,res) =>{
+        res.render('user')
+        
+        })
 
 app.get('/register', (req,res) => {
   res.render('register')
