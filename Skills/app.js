@@ -37,7 +37,6 @@ function isAuthenticated(req,res,next) {
   }
 }
 
-<<<<<<< HEAD
 app.post ('/add-skill', (req, res) => {
   let description = req.body.body
   let userId = req.body.id
@@ -54,9 +53,7 @@ app.post ('/add-skill', (req, res) => {
   res.redirect("/user")
 })
 
-=======
-// Posts //
->>>>>>> master
+
 
 app.post('/login', (req,res) => {
 
@@ -81,7 +78,7 @@ app.post('/login', (req,res) => {
             if (req.session){
               req.session.user = user.dataValues
           }
-          res.render('home', {'user' : user})
+          res.redirect('/home')
 
         } else {
           res.render("login", {message: "Invalid username or password!"})
@@ -140,13 +137,20 @@ app.post('/add-category', (req, res) => {
 })
 app.get('/home', isAuthenticated, (req, res) => {
   models.Category.findAll().then(function(categories) {
-    console.log(categories)
-    res.render('home', {categories: categories})
+
+  models.User.findOne({
+    where: {
+      username: req.session.user.username
+    }
+  }).then(function(user) {
+
+    res.render('home', {user: user, categories: categories})
   })
 })
-app.get('/home', isAuthenticated, (req,res) => {
-  res.render('home')
 })
+// app.get('/home', isAuthenticated, (req,res) => {
+//   res.render('home')
+// })
 app.get('/trade', isAuthenticated, (req,res) => {
   res.render('trade')
 })
