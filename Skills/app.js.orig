@@ -54,6 +54,11 @@ app.post ('/add-skill', (req, res) => {
   res.redirect("/user")
 })
 
+<<<<<<< HEAD
+
+=======
+// Posts //
+>>>>>>> master
 
 app.post('/login', (req,res) => {
 
@@ -114,6 +119,7 @@ app.post('/register',  (req,res) =>{
 
 app.get('/trade', isAuthenticated, (req, res) =>{
   models.Category.findAll().then(function(categories) {
+    console.log(categories)
     res.render('trade', {categories: categories})
   })
 })
@@ -156,7 +162,9 @@ app.get('/home', isAuthenticated, (req, res) => {
   })
 })
 })
-
+// app.get('/home', isAuthenticated, (req,res) => {
+//   res.render('home')
+// })
 app.get('/trade', isAuthenticated, (req,res) => {
   res.render('trade')
 })
