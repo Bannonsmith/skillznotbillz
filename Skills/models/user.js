@@ -7,7 +7,10 @@ module.exports = (sequelize, DataTypes) => {
     city: DataTypes.STRING
   }, {});
   User.associate = function(models) {
-    User.hasMany(models.Description)
+    User.hasMany(models.Description, {
+      foreignKey: 'userId',
+      as: 'Descriptions'
+    })
   };
   return User;
 };

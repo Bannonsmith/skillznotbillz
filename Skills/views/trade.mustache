@@ -3,11 +3,15 @@
 <body>
 <h1>Make a Trade</h1>
 <h2>Select the category of skill that you would like to learn.</h2>
-</form>
-<form action="/trades" method="POST">
-<button type="submit">Academic Tutoring</button>
-</form>
-<form action="/trades" method="POST">
+
+
+{{#categories}}
+  <form action="/tradeAT/{{id}}" method="GET">
+    <button type="submit">{{name}}</button>
+  </form>
+{{/categories}}
+
+<!-- <form action="/trades" method="POST">
 <button type="submit">Animal Training</button>
 </form>
 <form action="/trades" method="POST">
@@ -39,9 +43,11 @@
 </form>
 <form action="/trades" method="POST">
 <button type="submit">Other</button>
-</form>
+</form> -->
 
-{{#Users}}
-{{/Users}}
+{{#description}}
+{{name}}
+{{body}}
+{{/description}}
 </body>
 </html>
