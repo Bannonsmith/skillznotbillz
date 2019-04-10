@@ -10,6 +10,7 @@ const saltRounds = 10
 
 const VIEWS_PATH= path.join(__dirname, '/views');
 // console.log(VIEWS_PATH)
+console.log(VIEWS_PATH)
 
 app.use(session({
   secret: 'keyboard cat',
@@ -52,7 +53,6 @@ app.post ('/add-skill', (req, res) => {
   })
   res.redirect("/user")
 })
-
 
 
 app.post('/login', (req,res) => {
@@ -120,15 +120,23 @@ app.get('/trade', isAuthenticated, (req, res) =>{
 
 app.get('/tradeSkill/:id', (req,res) => {
   let id = req.params.id
-  models.Description.findAll({
-    where: {
-      categoryId: id,
-    }
-  }).then(function(description) {
-
-     res.render('trade', {description: description})
+  models.Category.findAll().then(function(categories) {
+    models.Description.findAll({
+      where : {
+        categoryId: id
+      }
+    })
+    .then((descriptions) => {
+      let category = categories.filter(function(cat) {
+        return cat.dataValues.id == id
+      })[0].dataValues.name
+      console.log(category)
+      res.render('trade', {description: descriptions, categories: categories, category: category } )
+    })
   })
 })
+
+
 
 app.post('/add-category', (req, res) => {
     id = req.body.id
@@ -148,9 +156,7 @@ app.get('/home', isAuthenticated, (req, res) => {
   })
 })
 })
-// app.get('/home', isAuthenticated, (req,res) => {
-//   res.render('home')
-// })
+
 app.get('/trade', isAuthenticated, (req,res) => {
   res.render('trade')
 })
@@ -158,6 +164,12 @@ app.get('/trade', isAuthenticated, (req,res) => {
 app.get('/login', (req,res) => {
   res.render('login')
 })
+//users page
+
+app.get('/user', (req,res) =>{
+        res.render('user')
+
+        })
 
 app.get('/register', (req,res) => {
   res.render('register')

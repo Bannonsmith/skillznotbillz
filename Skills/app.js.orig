@@ -9,6 +9,7 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 const VIEWS_PATH= path.join(__dirname, '/views');
+// console.log(VIEWS_PATH)
 console.log(VIEWS_PATH)
 
 app.use(session({
@@ -18,11 +19,15 @@ app.use(session({
 }))
 
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views','./views')
 app.set('view engine','mustache')
 
+
+
+// Functions //
 
 function isAuthenticated(req,res,next) {
   if (req.session.user) {
@@ -33,20 +38,42 @@ function isAuthenticated(req,res,next) {
   }
 }
 
+app.post ('/add-skill', (req, res) => {
+  let description = req.body.body
+  let userId = req.body.id
+  let categoryid = req.body.categoryid
+
+  let skill = models.Description.build({
+    body: description,
+    userId: userId,
+    categoryId: categoryId
+  })
+  description.save().then((savedDescription) => {
+    console.log(savedDescription)
+  })
+  res.redirect("/user")
+})
+
+<<<<<<< HEAD
+
+=======
+// Posts //
+>>>>>>> master
+
 app.post('/login', (req,res) => {
 
-  console.log(req.body)
+  // console.log(req.body)
   let username = req.body.username
   let password = req.body.password
 
-  console.log(username)
+  // console.log(username)
 
   models.User.findOne({
     where: {
       username: username
     }
   }).then(function(user) {
-    console.log(user)
+    // console.log(user)
     if (user === null) {
       res.render("login", {message: "Invalid username or password!"})
     }
@@ -56,7 +83,7 @@ app.post('/login', (req,res) => {
             if (req.session){
               req.session.user = user.dataValues
           }
-          res.render('home', {'user' : user})
+          res.redirect('/home')
 
         } else {
           res.render("login", {message: "Invalid username or password!"})
@@ -76,7 +103,7 @@ app.post('/registration', (req,res) => {
     city: req.body.city
   })
   user.save().then(function(newUser){
-    console.log(newUser)
+    // console.log(newUser)
   })
   res.redirect('/login')
 })
@@ -87,42 +114,57 @@ app.post('/register',  (req,res) =>{
 
 })
 
-<<<<<<< HEAD
 
 // Gets //
 
-app.get('/trade', (req, res) =>{
+app.get('/trade', isAuthenticated, (req, res) =>{
   models.Category.findAll().then(function(categories) {
+    console.log(categories)
     res.render('trade', {categories: categories})
   })
 })
 
-app.get('/tradeAT/:id', (req,res) => {
+app.get('/tradeSkill/:id', (req,res) => {
   let id = req.params.id
-  let category = req.params.name
-  models.Description.findAll({
+  models.Category.findAll().then(function(categories) {
+    models.Description.findAll({
+      where : {
+        categoryId: id
+      }
+    })
+    .then((descriptions) => {
+      let category = categories.filter(function(cat) {
+        return cat.dataValues.id == id
+      })[0].dataValues.name
+      console.log(category)
+      res.render('trade', {description: descriptions, categories: categories, category: category } )
+    })
+  })
+})
+
+
+
+app.post('/add-category', (req, res) => {
+    id = req.body.id
+    name = req.body.name
+
+})
+app.get('/home', isAuthenticated, (req, res) => {
+  models.Category.findAll().then(function(categories) {
+
+  models.User.findOne({
     where: {
-      categoryId: id,
+      username: req.session.user.username
     }
-  }).then(function(description) {
+  }).then(function(user) {
 
-     res.render('trade', {description: description}, {categories: categories})
+    res.render('home', {user: user, categories: categories})
   })
 })
-
-app.get('/home', isAuthenticated, (req,res) => {
-=======
-app.get('/home', isAuthenticated, (req,res) => {
-<<<<<<< HEAD
-  models.Category.findAll().then((categories) => {
-    console.log(categories)
-    res.render('home', {categories: categories})
-  })
-=======
->>>>>>> master
-  res.render('home')
->>>>>>> master
 })
+// app.get('/home', isAuthenticated, (req,res) => {
+//   res.render('home')
+// })
 app.get('/trade', isAuthenticated, (req,res) => {
   res.render('trade')
 })
@@ -130,6 +172,12 @@ app.get('/trade', isAuthenticated, (req,res) => {
 app.get('/login', (req,res) => {
   res.render('login')
 })
+//users page
+
+app.get('/user', (req,res) =>{
+        res.render('user')
+
+        })
 
 app.get('/register', (req,res) => {
   res.render('register')
