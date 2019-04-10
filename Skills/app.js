@@ -38,6 +38,19 @@ function isAuthenticated(req,res,next) {
   }
 }
 
+app.get("/show-users-skills", (req,res) =>
+{
+  models.Description.findAll({
+    where: {
+      userId: req.session.user.id
+    }
+  }).then((description) => {
+    console.log(description)
+
+    res.render("user", {description: description})
+  })
+})
+
 
 app.post('/logout', function(req, res, next) {
  if (req.session) {
@@ -199,13 +212,6 @@ app.get('/login', (req,res) => {
 app.get('/user', (req,res) =>{
   // let id = req.params.userId
   //
-  // models.Category.findAll().then(function(categories) {
-  //   models.Description.findAll(){
-  //     where: {
-  //       userId: id
-  //     }
-  //   }
-  // })
 
 
   res.render('user')
