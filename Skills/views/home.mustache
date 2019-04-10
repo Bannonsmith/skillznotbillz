@@ -5,9 +5,56 @@
     <title></title>
   </head>
   <body>
-<h1> test </h1>
+<h1>  </h1>
+<a href="/trade">Trade</a>
+<a href="/userProfile">User Profile</a>
+<a href="/login">login</a>
+<a href="/register">register</a>
+
+<br>
+<br>
+<br>
+
+
+
+<div class="">
+
 {{#user}}
-  {{username}}
+  Hello {{username}}, lets get started
 {{/user}}
+<br>
+<br>
+<br>
+If you havent created a profile click the button below
+<a href="/userProfile"><button type="button">{{name}}</button></a>
+</div>
+
+ <br>
+ <br>
+{{#categories}}
+<form class="" action="/home" method="post" name="">
+  <input type="hidden" name="category" value="{{id}}">
+  <input type="radio" name="category"/>{{name}}
+</form>
+
+{{/categories}}
+
+<br>
+<br>
+<br>
+
+your skill
+<form class="" action="/add-skill" method="post">
+  <input type="text" name="description" value="" placeholder="description">
+  <button type="submit" name="button">submit</button>
+</form>
+
+
+
+
+
+
   </body>
+
+
 </html>
