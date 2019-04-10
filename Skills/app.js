@@ -54,7 +54,6 @@ app.post ('/add-skill', (req, res) => {
   res.redirect("/user")
 })
 
-=======
 // Posts //
 
 app.post('/login', (req,res) => {
@@ -116,21 +115,27 @@ app.post('/register',  (req,res) =>{
 
 app.get('/trade', isAuthenticated, (req, res) =>{
   models.Category.findAll().then(function(categories) {
+    console.log(categories)
     res.render('trade', {categories: categories})
   })
 })
 
 app.get('/tradeSkill/:id', (req,res) => {
   let id = req.params.id
-  models.Description.findAll({
-    where: {
-      categoryId: id,
-    }
-  }).then(function(description) {
-
-     res.render('trade', {description: description})
+  models.Category.findAll().then(function(categories) {
+    models.Description.findAll({
+      where : {
+        categoryId: id
+      }
+    })
+    .then((descriptions) => {
+      console.log(categories)
+      console.log(descriptions)
+      res.render('trade', {description: descriptions, categories: categories} )
+    })
   })
 })
+
 
 app.post('/add-category', (req, res) => {
     id = req.body.id
@@ -157,7 +162,7 @@ app.get('/login', (req,res) => {
 
 app.get('/user', (req,res) =>{
         res.render('user')
-        
+
         })
 
 app.get('/register', (req,res) => {
