@@ -10,7 +10,7 @@ const saltRounds = 10
 
 const VIEWS_PATH= path.join(__dirname, '/views');
 // console.log(VIEWS_PATH)
-console.log(VIEWS_PATH)
+// console.log(VIEWS_PATH)
 
 app.use(session({
   secret: 'keyboard cat',
@@ -39,17 +39,22 @@ function isAuthenticated(req,res,next) {
 }
 
 app.post ('/add-skill', (req, res) => {
-  let description = req.body.body
-  let userId = req.body.id
-  let categoryid = req.body.categoryid
+  let description = req.body.description
+  let categoryid = req.body.category
+  let category = req.body.category
+  let userId = req.session.user.id
 
+  console.log(userId)
+  console.log(category)
   let skill = models.Description.build({
     body: description,
     userId: userId,
-    categoryId: categoryId
+    categoryId: categoryid
   })
-  description.save().then((savedDescription) => {
+  skill.save().then((savedDescription) => {
     console.log(savedDescription)
+  }).catch(function(err) {
+    console.log(err)
   })
   res.redirect("/user")
 })
