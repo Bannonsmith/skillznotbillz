@@ -129,12 +129,15 @@ app.get('/tradeSkill/:id', (req,res) => {
       }
     })
     .then((descriptions) => {
-      console.log(categories)
-      console.log(descriptions)
-      res.render('trade', {description: descriptions, categories: categories} )
+      let category = categories.filter(function(cat) {
+        return cat.dataValues.id == id
+      })[0].dataValues.name
+      console.log(category)
+      res.render('trade', {description: descriptions, categories: categories, category: category } )
     })
   })
 })
+
 
 
 app.post('/add-category', (req, res) => {
