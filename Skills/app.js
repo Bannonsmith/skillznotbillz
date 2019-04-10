@@ -65,23 +65,7 @@ app.post('/login', (req,res) => {
     }
   })
 })
-//   models.User.findOne({
-//     where: {
-//       username: req.body.username,
-//       password: hash
-//     }
-//   }).then(function(user) {
-//     if (user){
-//       req.session.username = user.username
-//       res.redirect('/home')
-//     } else {
-//      res.render('login', {Message: "Invalid Credentials!"})
-//      console.log(hash)
-//
-//     }
-//   })
-// })
-// })
+
 app.post('/registration', (req,res) => {
   bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
 
@@ -100,7 +84,6 @@ app.post('/registration', (req,res) => {
 
 app.post('/register', (req,res) =>{
   res.redirect('/register')
-
 })
 
 //users page
