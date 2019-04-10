@@ -38,6 +38,24 @@ function isAuthenticated(req,res,next) {
   }
 }
 
+
+app.post('/logout', function(req, res, next) {
+ if (req.session) {
+   req.session.destroy(function(err) {
+     if(err) {
+       return next(err);
+     } else {
+       res.redirect('/login');
+       console.log(user)
+     }
+   });
+ }
+})
+
+app.get('/logout',(req,res) =>{
+ res.render('logout')
+})
+
 app.post ('/add-skill', (req, res) => {
   let description = req.body.description
   let categoryid = req.body.category
