@@ -18,11 +18,15 @@ app.use(session({
 }))
 
 
+app.use(express.static(path.join(__dirname, 'public')));
 app.use(bodyParser.urlencoded({ extended: false }))
 app.engine('mustache', mustacheExpress(VIEWS_PATH + '/partials', '.mustache'))
 app.set('views','./views')
 app.set('view engine','mustache')
 
+
+
+// Functions //
 
 function isAuthenticated(req,res,next) {
   if (req.session.user) {
@@ -33,6 +37,7 @@ function isAuthenticated(req,res,next) {
   }
 }
 
+<<<<<<< HEAD
 app.post ('/add-skill', (req, res) => {
   let description = req.body.body
   let userId = req.body.id
@@ -49,6 +54,9 @@ app.post ('/add-skill', (req, res) => {
   res.redirect("/user")
 })
 
+=======
+// Posts //
+>>>>>>> master
 
 app.post('/login', (req,res) => {
 
@@ -113,16 +121,15 @@ app.get('/trade', isAuthenticated, (req, res) =>{
   })
 })
 
-app.get('/tradeAT/:id', (req,res) => {
+app.get('/tradeSkill/:id', (req,res) => {
   let id = req.params.id
-  let category = req.params.name
   models.Description.findAll({
     where: {
       categoryId: id,
     }
   }).then(function(description) {
 
-     res.render('trade', {description: description}, {categories: categories})
+     res.render('trade', {description: description})
   })
 })
 
