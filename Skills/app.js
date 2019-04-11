@@ -241,14 +241,30 @@ app.get('/tradeSkill/:id', (req,res) => {
         userId: {
          [Op.ne]: req.session.user.id
        }
-      }
+      },
+      include: [{model: models.User, as: "Users"}]
     })
     .then((descriptions) => {
-      let category = categories.filter(function(cat) {
-        return cat.dataValues.id == id
-      })[0].dataValues.name
-      // console.log(category)
-      res.render('trade', {description: descriptions, categories: categories, category: category } )
+      descriptions.forEach((desc) => {
+        console.log(desc.dataValues.Users.dataValues.email)
+      })
+
+      let descriptionArray = descriptions.map((desc) => {
+        return {
+          id: desc.dataValues.id,
+          body: desc.dataValues.body,
+          categoryId: desc.dataValues.categoryId,
+          user: {
+            id: desc.dataValues.Users.dataValues.id,
+            username: desc.dataValues.Users.dataValues.username,
+            email: desc.dataValues.Users.dataValues.email
+          }
+        }
+      })
+      let category = categories[id -1].dataValues.name
+
+    res.render('trade', {descriptions: descriptionArray, categories: categories, category: category})
+
     })
   })
 })
@@ -289,35 +305,6 @@ app.post('/deletepost',(req,res)=>{
     res.redirect('/home')
 })
 
-// Exchange Button //
-
-app.post('/exchange/:id', (req,res) => {
-  let id = req.params.id
-  let userId = req.body.userId
-  let categoryId = req.body.categoryId
-
-  models.Category.findAll().then(function(categories) {
-    models.Description.findAll({
-      where : {
-        categoryId: categoryId
-      }
-    })
-    .then((descriptions) => {
-      let category = categories.filter(function(cat) {
-        return cat.dataValues.id == id
-      })[0].dataValues.name
-
-      models.User.findOne({
-        where: {
-          id: userId
-        }
-        }).then(function(user){
-          console.log(user)
-          res.render('trade', {description: descriptions, categories: categories, category: category, users: user.email})
-      })
-    })
-  })
-})
 
 
 
