@@ -1,14 +1,8 @@
 {
   "development": {
-<<<<<<< HEAD:config/config.json
-    "username": "wgwzhhyz",
-    "password": "B_KnINgA9RuGmGCHUgnq-EO3n8vOOTss",
-    "database": "wgwzhhyz",
-=======
     "username": "kfqbhudj",
     "password": "XDvYCqGNNYR9orRh4xvdP3VI1aAgL9aA",
     "database": "kfqbhudj",
->>>>>>> 49c2b83281a3430e2651254c210dafd0092c2ce1:Skills/config/config.json
     "host": "isilo.db.elephantsql.com",
     "dialect": "postgres"
   },
