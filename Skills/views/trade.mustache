@@ -27,7 +27,14 @@
   <div class="card-body">
     <h5 class="card-title">{{category}}</h5>
     <p class="card-text">{{body}}</p>
-    <a href="#" class="btn btn-primary">Exchange</a>
+    <form action="/exchange/{{id}}" method="POST">
+      <input type = "hidden" name = "userId" value = "{{userId}}">
+      <input type = "hidden" name = "categoryId" value = "{{categoryId}}">
+      <button type="submit">Exchange</button>
+    </form>
+
+  {{users}}
+
   </div>
 </div>
 {{/description}}
