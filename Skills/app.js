@@ -155,7 +155,6 @@ app.get('/trade', isAuthenticated, (req, res) =>{
 })
 
 app.get('/tradeSkill/:id', (req,res) => {
-  console.log(req.params, 'parammmms')
   let id = req.params.id
 
   models.Category.findAll().then(function(categories) {
@@ -210,8 +209,35 @@ app.post('/deletepost',(req,res)=>{
     res.redirect('home')
 })
 
-// ?? //
+// Exchange Button //
 
+app.post('/exchange/:id', (req,res) => {
+  let id = req.params.id
+  let userId = req.body.userId
+  let categoryId = req.body.categoryId
+
+  models.Category.findAll().then(function(categories) {
+    models.Description.findAll({
+      where : {
+        categoryId: categoryId
+      }
+    })
+    .then((descriptions) => {
+      let category = categories.filter(function(cat) {
+        return cat.dataValues.id == id
+      })[0].dataValues.name
+
+      models.User.findOne({
+        where: {
+          id: userId
+        }
+        }).then(function(user){
+          console.log(user)
+          res.render('trade', {description: descriptions, categories: categories, category: category, users: user.email})
+      })
+    })
+  })
+})
 
 
 
@@ -255,6 +281,9 @@ app.get('/register', (req,res) => {
   res.render('register')
 })
 
+app.get('/exchange', (req,res) => {
+  res.render('exchange')
+})
 // Listen for server //
 
 app.listen(3000,() => {
