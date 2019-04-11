@@ -1,0 +1,17 @@
+<html>
+<head>
+{{> header}}
+</head>
+<body>
+<h1>Edit Posts</h1>
+{{#description}}
+<li>
+<form action="/updatechoice" method="POST">
+<textarea name="descriptionBody">{{body}}</textarea>
+<input type="hidden" name="descriptionId" value="{{id}}" />
+<button type="submit">Update</button>
+</li>
+</form>
+{{/description}}
+</body>
+</html>
