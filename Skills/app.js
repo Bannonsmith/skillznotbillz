@@ -240,7 +240,7 @@ app.get('/tradeSkill/:id', (req,res) => {
         categoryId: id,
         userId: {
          [Op.ne]: req.session.user.id
-       }
+       } 
       },
       include: [{model: models.User, as: "Users"}]
     })
