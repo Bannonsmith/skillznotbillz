@@ -38,18 +38,86 @@ function isAuthenticated(req,res,next) {
   }
 }
 
-app.get("/show-users-skills", (req,res) =>
-{
+app.get("/show-users-skills", (req,res) => {
+  // let userId = req.session.user.id
+
   models.Description.findAll({
     where: {
       userId: req.session.user.id
-    }
-  }).then((description) => {
-    console.log(description)
+    },
+    include: [
+      {
+        model: models.Category,
+        as: 'category'
+      }
+    ]
+  }).then((descriptions) => {
 
-    res.render("user", {description: description})
+      // console.log(descriptions)
+
+      let descs = descriptions.map((desc) => {
+        return {categoryName: desc.category.name,
+           body: desc.body, userId: desc.userId,
+           descriptionId: desc.id, categoryId: desc.category.id
+          }
+      })
+
+      console.log(descs)
+
+      res.render('user',{descriptions: descs})
+      /*
+      descriptions.forEach((desc) => {
+
+        let description = desc.dataValues
+        let category = desc.dataValues.category.dataValues
+
+        res.render("user", {description: description, categories: category})
+
+    }) */
   })
 })
+
+// // console.log(desc.dataValues)
+// // console.log("breakr")
+// // console.log(desc.dataValues.category.dataValues)
+// // console.log(desc.category.dataValues.category.dataValues.name)
+// // let categoryName = desc.map((d) => {
+// //   return d.name
+// // })
+// // console.log(categoryName)
+// /*
+// })
+// // desc.map((scrip) => {
+// //   conosole.log(scrip)
+// // })
+//
+//
+//
+//
+// models.Category.findAll().then(function(categories) {
+// models.Description.findAll({
+// where: {
+//   userId: req.session.user.id
+// }
+// }).then((description) => {
+//
+// let categoryNames = categories.map((category) => {
+//   return category.name
+// })
+// console.log("CATEGORY NAMES")
+// console.log(categoryNames)
+//
+// // console.log(categories)
+// function loop(loo) {
+//   for(let i = 0; i < loo.length; i++) {
+//     let loo = loo[i]
+//     return loo.dataValues
+//    }
+// console.log(loop(categories))
+// }
+// res.render("user", {description: description, categories: categoryNames})
+// })
+// }) */
 
 
 app.post('/logout', function(req, res, next) {
@@ -59,7 +127,7 @@ app.post('/logout', function(req, res, next) {
        return next(err);
      } else {
        res.redirect('/login');
-       console.log(user)
+       // console.log(user)
      }
    });
  }
@@ -75,17 +143,17 @@ app.post ('/add-skill', (req, res) => {
   let category = req.body.category
   let userId = req.session.user.id
 
-  console.log(userId)
-  console.log(category)
+  // console.log(userId)
+  // console.log(category)
   let skill = models.Description.build({
     body: description,
     userId: userId,
     categoryId: categoryid
   })
   skill.save().then((savedDescription) => {
-    console.log(savedDescription)
+    // console.log(savedDescription)
   }).catch(function(err) {
-    console.log(err)
+    // console.log(err)
   })
   res.redirect("/user")
 })
@@ -155,7 +223,7 @@ app.get('/trade', isAuthenticated, (req, res) =>{
 })
 
 app.get('/tradeSkill/:id', (req,res) => {
-  console.log(req.params, 'parammmms')
+  // console.log(req.params, 'parammmms')
   let id = req.params.id
 
   models.Category.findAll().then(function(categories) {
@@ -168,7 +236,7 @@ app.get('/tradeSkill/:id', (req,res) => {
       let category = categories.filter(function(cat) {
         return cat.dataValues.id == id
       })[0].dataValues.name
-      console.log(category)
+      // console.log(category)
       res.render('trade', {description: descriptions, categories: categories, category: category } )
     })
   })
@@ -209,7 +277,7 @@ app.get('/login', (req,res) => {
 
 //users page
 
-app.get('/user', (req,res) =>{
+app.get('/user', isAuthenticated, (req,res) =>{
   // let id = req.params.userId
   //
 
