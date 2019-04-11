@@ -22,22 +22,22 @@
 {{/categories}}
 </div>
 
-{{#description}}
+{{#descriptions}}
 <div class="card" style="width: 18rem;">
   <div class="card-body">
     <h5 class="card-title">{{category}}</h5>
     <p class="card-text">{{body}}</p>
-    <form action="/exchange/{{id}}" method="POST">
-      <input type = "hidden" name = "userId" value = "{{userId}}">
-      <input type = "hidden" name = "categoryId" value = "{{categoryId}}">
-      <button type="submit">Exchange</button>
+    <p class="card-text">Contact Info: {{user.email}}</p>
+    <br>
+    <h6 class="card-title"> Send a message to this User</h6>
+    <form action="mailto:{{user.email}}" method="GET">
+    <input name="subject" type="text" placeholder="Email Title" />
+    <textarea name="body" placeholder="Email Body"></textarea>
+    <input type="submit" value="Send" />
     </form>
-
-  {{users}}
-
   </div>
 </div>
-{{/description}}
+{{/descriptions}}
 
 
 </body>
