@@ -1,0 +1,54 @@
+<!DOCTYPE html>
+<html lang="en" dir="ltr">
+  <head>
+    <meta charset="utf-8">
+    {{> header}}
+  </head>
+  <body>
+
+
+<br>
+<br>
+<br>
+
+
+
+<div class="">
+
+{{#user}}
+  Hello {{username}}, lets get started
+{{/user}}
+<br>
+<br>
+<br>
+If you havent created a profile click the button below
+<a href="/userProfile"><button type="button">{{name}}</button></a>
+</div>
+
+ <br>
+ <br>
+ <form class="" action="/add-skill" method="post">
+
+{{#categories}}
+  <!-- <input type="hidden" name="category" value="{{id}}"> -->
+  <input type="radio" name="category" value = '{{id}}'>{{name}}
+{{/categories}}
+<input type="text" name="description" value="" placeholder="description">
+<button type="submit" name="button">submit</button>
+</form>
+
+<br>
+<br>
+<br>
+
+
+
+
+
+
+
+
+  </body>
+
+
+</html>

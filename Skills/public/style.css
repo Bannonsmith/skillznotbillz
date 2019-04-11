@@ -1,0 +1,23 @@
+#loginbox {
+  background-color: yellow;
+}
+
+
+/* Trade Page */
+
+#tradeheader {
+  text-align: center;
+}
+
+#tradebuttonbox {
+display: flex;
+flex-wrap: wrap;
+justify-content: space-between;
+padding: 10px;
+
+}
+
+#tradebutton {
+  padding: 10px;
+  border
+}
