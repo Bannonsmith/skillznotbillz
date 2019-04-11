@@ -11,6 +11,8 @@ const saltRounds = 10
 const VIEWS_PATH= path.join(__dirname, '/views');
 // console.log(VIEWS_PATH)
 // console.log(VIEWS_PATH)
+const sequelize = require('sequelize')
+const Op = sequelize.Op
 
 app.use(session({
   secret: 'keyboard cat',
@@ -201,12 +203,19 @@ app.post('/registration', (req,res) => {
     password: hash,
     city: req.body.city
   })
-  user.save().then(function(newUser){
-    // console.log(newUser)
+  models.User.findOne({
+     where: {username : req.body.username}
+   }).then(function (result) {
+         if (null != result) {
+           console.log("USERNAME ALREADY EXISTS:", result.username);
+         }
+         else {
+           user.save().then(function(newUser){
+   })}
+   res.redirect('/login')
   })
-  res.redirect('/login')
-})
-})
+  })
+  })
 
 app.post('/register',  (req,res) =>{
   res.redirect('/register')
@@ -228,7 +237,10 @@ app.get('/tradeSkill/:id', (req,res) => {
   models.Category.findAll().then(function(categories) {
     models.Description.findAll({
       where : {
-        categoryId: id
+        categoryId: id,
+        userId: {
+         [Op.ne]: req.session.user.id
+       }
       }
     })
     .then((descriptions) => {
@@ -265,7 +277,7 @@ app.post('/updatechoice',(req,res)=>{
         id: req.body.descriptionId
       }
     })
-    res.redirect('user')
+    res.redirect('/user')
 })
 
 app.post('/deletepost',(req,res)=>{
@@ -274,7 +286,7 @@ app.post('/deletepost',(req,res)=>{
         id : req.body.postId
       }
     })
-    res.redirect('home')
+    res.redirect('/home')
 })
 
 // Exchange Button //
@@ -352,6 +364,7 @@ app.get('/register', (req,res) => {
 app.get('/exchange', (req,res) => {
   res.render('exchange')
 })
+
 // Listen for server //
 
 app.listen(3000,() => {
