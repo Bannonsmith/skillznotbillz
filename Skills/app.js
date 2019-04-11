@@ -242,6 +242,41 @@ app.get('/tradeSkill/:id', (req,res) => {
   })
 })
 
+// user page
+app.get('/updatechoice', (req,res) => {
+  res.render('updatechoice')
+})
+
+app.get('/editchoice/:id',(req,res)=> {
+  console.log(req.params, 'it clicked')
+  models.Description.findOne({
+      where: {
+        id : req.params.id
+      }
+    }).then((description) => {
+      res.render('updatechoice', {description: description})
+    })
+})
+
+app.post('/updatechoice',(req,res)=>{
+  models.Description.update({
+      body: req.body.descriptionBody
+    },{
+      where: {
+        id: req.body.descriptionId
+      }
+    })
+    res.redirect('user')
+})
+
+app.post('/deletepost',(req,res)=>{
+  models.Description.destroy({
+      where: {
+        id : req.body.postId
+      }
+    })
+    res.redirect('home')
+})
 
 // ?? //
 
@@ -280,8 +315,6 @@ app.get('/login', (req,res) => {
 app.get('/user', isAuthenticated, (req,res) =>{
   // let id = req.params.userId
   //
-
-
   res.render('user')
 
 })
