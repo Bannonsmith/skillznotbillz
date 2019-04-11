@@ -13,8 +13,8 @@ module.exports = (sequelize, DataTypes) => {
 
     Description.belongsTo(models.Category, {
       foreignKey: 'categoryId',
-      as: 'Categories',
-      onDelete: 'CASCADE'
+      as: 'category'
+      //onDelete: 'CASCADE'
 
     });
 
