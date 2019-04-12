@@ -25,8 +25,8 @@
       <div class="card-body">
         <h5 class="card-title">{{categoryName}}</h5>
         <p class="card-text">{{body}}</p>
-          <a href="/editchoice/{{descriptionId}}" class="btn btn-primary">Edit</a>
-          <form action="/deletepost" method="POST">
+          <a href="/users/editchoice/{{descriptionId}}" class="btn btn-primary">Edit</a>
+          <form action="/users/deletepost" method="POST">
             <input type="hidden" name="postId" value="{{descriptionId}}" />
             <button type="submit" class="btn btn-primary">Delete</button>
             </form>

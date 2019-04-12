@@ -9,8 +9,7 @@ const bcrypt = require('bcrypt')
 const saltRounds = 10
 
 const VIEWS_PATH= path.join(__dirname, '/views');
-// console.log(VIEWS_PATH)
-// console.log(VIEWS_PATH)
+
 const sequelize = require('sequelize')
 const Op = sequelize.Op
 
@@ -28,6 +27,8 @@ app.set('views','./views')
 app.set('view engine','mustache')
 
 
+const userRoutes = require('./routes/users')
+app.use('/users', userRoutes)
 
 // Functions //
 
@@ -39,87 +40,6 @@ function isAuthenticated(req,res,next) {
     res.redirect('/login')
   }
 }
-
-
-app.get("/show-users-skills", (req,res) =>
-{
-  models.Description.findAll({
-    where: {
-      userId: req.session.user.id
-    },
-    include: [
-      {
-        model: models.Category,
-        as: 'category'
-      }
-    ]
-  }).then((descriptions) => {
-
-      // console.log(descriptions)
-
-      let descs = descriptions.map((desc) => {
-        return {categoryName: desc.category.name,
-           body: desc.body, userId: desc.userId,
-           descriptionId: desc.id, categoryId: desc.category.id
-          }
-      })
-
-      console.log(descs)
-
-      res.render('user',{descriptions: descs})
-      /*
-      descriptions.forEach((desc) => {
-
-        let description = desc.dataValues
-        let category = desc.dataValues.category.dataValues
-
-        res.render("user", {description: description, categories: category})
-
-    }) */
-  })
-})
-
-// // console.log(desc.dataValues)
-// // console.log("breakr")
-// // console.log(desc.dataValues.category.dataValues)
-// // console.log(desc.category.dataValues.category.dataValues.name)
-// // let categoryName = desc.map((d) => {
-// //   return d.name
-// // })
-// // console.log(categoryName)
-// /*
-// })
-// // desc.map((scrip) => {
-// //   conosole.log(scrip)
-// // })
-//
-//
-//
-//
-// models.Category.findAll().then(function(categories) {
-// models.Description.findAll({
-// where: {
-//   userId: req.session.user.id
-// }
-// }).then((description) => {
-//
-// let categoryNames = categories.map((category) => {
-//   return category.name
-// })
-// console.log("CATEGORY NAMES")
-// console.log(categoryNames)
-//
-// // console.log(categories)
-// function loop(loo) {
-//   for(let i = 0; i < loo.length; i++) {
-//     let loo = loo[i]
-//     return loo.dataValues
-//    }
-// console.log(loop(categories))
-// }
-// res.render("user", {description: description, categories: categoryNames})
-// })
-// }) */
 
 
 app.post('/logout', function(req, res, next) {
@@ -137,25 +57,6 @@ app.post('/logout', function(req, res, next) {
 
 app.get('/logout',(req,res) =>{
  res.render('logout')
-})
-
-app.post ('/add-skill', (req, res) => {
-  let description = req.body.description
-  let categoryid = req.body.category
-  let category = req.body.category
-  let userId = req.session.user.id
-
-  // console.log(userId)
-  // console.log(category)
-  let skill = models.Description.build({
-    body: description,
-    userId: userId,
-    categoryId: categoryid
-  })
-  skill.save().then((savedDescription) => {
-  }).catch(function(err) {
-  })
-  res.redirect("/show-users-skills")
 })
 
 
@@ -179,7 +80,7 @@ app.post('/login', (req,res) => {
             if (req.session){
               req.session.user = user.dataValues
           }
-          res.redirect('/home')
+          res.redirect('/users/home')
 
         } else {
           res.render("login", {message: "Invalid username or password!"})
@@ -217,107 +118,10 @@ app.post('/register',  (req,res) =>{
 
 })
 
-
-// Trade Page //
-
-app.get('/trade', isAuthenticated, (req, res) =>{
-  models.Category.findAll().then(function(categories) {
-    res.render('trade', {categories: categories})
-  })
-})
-
-app.get('/tradeSkill/:id', (req,res) => {
-  let id = req.params.id
-
-  models.Category.findAll().then(function(categories) {
-    models.Description.findAll({
-      where : {
-        categoryId: id,
-        userId: {
-         [Op.ne]: req.session.user.id
-       }
-      },
-      include: [{model: models.User, as: "Users"}]
-    })
-    .then((descriptions) => {
-      descriptions.forEach((desc) => {
-      })
-
-      let descriptionArray = descriptions.map((desc) => {
-        return {
-          id: desc.dataValues.id,
-          body: desc.dataValues.body,
-          categoryId: desc.dataValues.categoryId,
-          user: {
-            id: desc.dataValues.Users.dataValues.id,
-            username: desc.dataValues.Users.dataValues.username,
-            email: desc.dataValues.Users.dataValues.email
-          }
-        }
-      })
-      let category = categories[id -1].dataValues.name
-
-    res.render('trade', {descriptions: descriptionArray, categories: categories, category: category})
-
-    })
-  })
-})
-
-// user page
-app.get('/updatechoice', (req,res) => {
-  res.render('updatechoice')
-})
-
-app.get('/editchoice/:id',(req,res)=> {
-  models.Description.findOne({
-      where: {
-        id : req.params.id
-      }
-    }).then((description) => {
-      res.render('updatechoice', {description: description})
-    })
-})
-
-app.post('/updatechoice',(req,res)=>{
-  models.Description.update({
-      body: req.body.descriptionBody
-    },{
-      where: {
-        id: req.body.descriptionId
-      }
-    })
-    res.redirect('/show-users-skills')
-})
-
-app.post('/deletepost',(req,res)=>{
-  models.Description.destroy({
-      where: {
-        id : req.body.postId
-      }
-    })
-    res.redirect('/show-users-skills')
-})
-
-
-
-
 app.post('/add-category', (req, res) => {
     id = req.body.id
     name = req.body.name
 
-})
-app.get('/home', isAuthenticated, (req, res) => {
-  models.Category.findAll().then(function(categories) {
-
-  models.User.findOne({
-    where: {
-      username: req.session.user.username
-    }
-  }).then(function(user) {
-
-    res.render('home', {user: user, categories: categories})
-  })
-})
 })
 
 app.get('/trade', isAuthenticated, (req,res) => {
@@ -329,13 +133,6 @@ app.get('/login', (req,res) => {
 })
 
 //users page
-
-app.get('/user', isAuthenticated, (req,res) =>{
-  // let id = req.params.userId
-  //
-  res.render('user')
-
-})
 
 app.get('/register', (req,res) => {
   res.render('register')
