@@ -4,36 +4,35 @@
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css"
     integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T"
     crossorigin="anonymous">
-
+    <link rel="stylesheet" type="text/css" href="/profile.css">
   </head>
   {{> header}}
   <body>
 
-    {{#user}}
+    <br/>
+    <br/>
+    <h3 id="welcome">Your Skills are listed below. Select Edit or Delete to update your skills.</h3>
 
-    <h1> Welcome {{username}}!</h1>
-    {{/user}}
+    <br/>
 
-    <break>
-    </break>
-    <h3> This is a free service! You can legally exchange something you are good at with other people! Without paying </h3>
-
-
-
+     <div class="container">
     {{#descriptions}}
-    <div class="card" style="width: 18rem;">
+   
+    <div class="card" style="width: 18rem; height: 15rem">
       <div class="card-body">
         <h5 class="card-title">{{categoryName}}</h5>
         <p class="card-text">{{body}}</p>
-          <a href="/users/editchoice/{{descriptionId}}" class="btn btn-primary">Edit</a>
+          <a href="/users/editchoice/{{descriptionId}}" class="btn btn-info" id="btn" role="button">Edit</a>
+          <br/>
+          <br/>
           <form action="/users/deletepost" method="POST">
             <input type="hidden" name="postId" value="{{descriptionId}}" />
-            <button type="submit" class="btn btn-primary">Delete</button>
+            <button id="btn" type="submit" class="btn btn-info" style="justify-content: center;">Delete</button>
+            </div>
             </form>
       </div>
-    </div>
-
     {{/descriptions}}
+      </div>
     </body>
     <!-- <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js" integrity="sha384-KJ3o2DKtIkvYIK3UENzmM7KCkRr/rE9/Qpg6aAZGJwFDMVNA/GpGFF93hXpG5KkN" crossorigin="anonymous"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js" integrity="sha384-ApNbgh9B+Y1QKtv3Rn7W3mgPxhU9K/ScQsAP7hUibX39j7fakFPskvXusvfa0b4Q" crossorigin="anonymous"></script>
