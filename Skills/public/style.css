@@ -2,6 +2,40 @@
   background-color: yellow;
 }
 
+/* Home Page */
+.home {
+  text-align: right;
+  font-size: 40px;
+  font-family: inherit;
+  margin-top: 20%;
+}
+.flex-container img {
+  width: 420px;
+  height: 487px;
+}
+.circle {
+  display: inline-block;
+  justify-content: center;
+  margin-left: auto;
+  margin-right: auto;
+  margin-left: 220px;
+  margin-right: 220px;
+}
+
+.flex-container {
+  display: flex;
+  flex-direction: row;
+}
+.pad {
+  padding: 40px;
+  font-size: 25px;
+}
+
+.carousel  {
+  padding-left: 220px;
+  padding-right: 220px;
+  }
+
 
 /* Trade Page */
 
