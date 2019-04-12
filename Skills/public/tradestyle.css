@@ -1,7 +1,17 @@
 /* Trade Page */
 
+ body {
+   background-image: url("media/book2.jpeg")
+ }
+
 #tradeheader {
   text-align: center;
+  color: #f5f5f5;
+  text-shadow:
+    -1px -1px 0 #000,
+		1px -1px 0 #000,
+		-1px 1px 0 #000,
+		1px 1px 0 #000
 }
 
 #tradebuttonbox {
@@ -31,8 +41,8 @@ padding: 10px;
 .card {
   margin: 1%;
   height: 400px;
-  border-style: solid;
-  border-color: blue;
+  border: #f5f5f5;
+
 }
 
 .card a {
@@ -50,6 +60,6 @@ padding: 10px;
   left: 36px;
 }
 
-#contacttext {
-  font-weight: bold;
+#cardbodybox {
+  background-color: #f5f5f5;
 }
