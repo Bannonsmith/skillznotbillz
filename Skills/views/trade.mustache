@@ -4,7 +4,7 @@
   <meta name="viewport" content="width=device-width, initial-scale=1, shrink-to-fit=no">
 
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-  <link rel="stylesheet" type="text/css" href="/style.css">
+  <link rel="stylesheet" type="text/css" href="/tradestyle.css">
 
 </head>
 
@@ -15,25 +15,28 @@
 <h1>Make a Trade</h1>
 <h2>Select the category of skill that you would like to learn.</h2>
 </div>
+<br>
 
 <div id="tradebuttonbox">
 {{#categories}}
-  <a href="/users/tradeSkill/{{id}}"><button type="button" id="tradebutton" class="btn btn-outline-info" >{{name}}</button></a>
+  <a href="/users/tradeSkill/{{id}}"><button type="button" id="tradebutton" class="btn btn-outline-light" >{{name}}</button></a>
 {{/categories}}
 </div>
 
+<div class="cardbox">
 {{#descriptions}}
 <div class="card" style="width: 18rem;">
-  <div class="card-body">
+  <div class="card-body" id="cardbodybox">
     <h5 class="card-title">{{category}}</h5>
-    <p class="card-text">{{body}}</p>
-    <p class="card-text">Contact Info: {{user.email}}</p>
-    <br>
+    <h7 class="card-text">{{body}}</h7>
+    <br><br>
+    <p class="card-text" id="contacttext">Contact Info: {{user.email}}</p>
     <h6 class="card-title"> Send a message to this User</h6>
     <a href="mailto:{{user.email}}?subject=Let%27s%20Exchange%20Skills%21&body=Hello%2C%20{{user.email}}%0A%0AI%20saw%20your%20listing%20on%20Skill%20Exchange%20and%20I%27d%20like%20to%20learn%20more%20about%3A%0A%0A%0A{{category}}%0A%0A{{body}}%0A%0A%0APlease%20respond%20to%20my%20email%20at%20your%20earliest%20convenience%21%0A%0AThank%20you%2C%20"><img src="/media/email.png"></a>
   </div>
 </div>
 {{/descriptions}}
+</div>
 
 
 </body>
