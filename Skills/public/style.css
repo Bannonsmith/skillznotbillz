@@ -52,3 +52,20 @@ padding: 10px;
   padding: 10px;
   border
 }
+
+.backG {
+  color: white;
+  justify-content: center;
+}
+
+.register {
+  justify-content: center;
+  display: flex;
+  padding: 20%;
+}
+
+#butt {
+  margin: 0 auto;
+  width: 144px;
+  padding: 20px;
+}
