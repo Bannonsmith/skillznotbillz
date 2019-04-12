@@ -11,14 +11,14 @@
 <body>
   {{> header}}
 <div id="tradeheader">
-<br>
+<br/>
 <h1>Make a Trade</h1>
 <h2>Select the category of skill that you would like to learn.</h2>
 </div>
 
 <div id="tradebuttonbox">
 {{#categories}}
-  <a href="/tradeSkill/{{id}}"><button type="button" id="tradebutton" class="btn btn-outline-info" >{{name}}</button></a>
+  <a href="/users/tradeSkill/{{id}}"><button type="button" id="tradebutton" class="btn btn-outline-info" >{{name}}</button></a>
 {{/categories}}
 </div>
 

@@ -7,50 +7,31 @@
     <link rel="stylesheet" type="text/css" href="/style.css">
   </head>
   <body>
-
-
-<br>
-<br>
-<br>
-
-
-
-<div class="">
-
-{{#user}}
-  Hello {{username}}, lets get started
-{{/user}}
-<br>
-<br>
-<br>
-If you havent created a profile click the button below
-<a href="/userProfile"><button type="button">{{name}}</button></a>
-</div>
-
- <br>
- <br>
- <form class="" action="/add-skill" method="post">
-
-{{#categories}}
-  <!-- <input type="hidden" name="category" value="{{id}}"> -->
-  <input type="radio" name="category" value = '{{id}}'>{{name}}
-{{/categories}}
-<input type="text" name="description" value="" placeholder="description">
-<button type="submit" name="button">submit</button>
-</form>
-
-<br>
-<br>
-<br>
-
-
-
-
-
-
-
-
+    <br/>
+    <br/>
+    <br/>
+    <div class="">
+      {{#user}}
+        <p>Hello {{username}}, lets get started</p>
+      {{/user}}
+      <br/>
+      <br/>
+      <br/>
+      <p>If you havent created a profile click the button below</p>
+    </div>
+    <br/>
+    <br/>
+    <form action="/users/add-skill" method="POST">
+      {{#categories}}
+        <!-- <input type="hidden" name="category" value="{{id}}"> -->
+        <input type="radio" name="category" value = '{{id}}'><p>{{name}}</p>
+      {{/categories}}
+      <input type="text" name="description" value="" placeholder="description">
+      <button type="submit" name="button">submit</button>
+    </form>
+    <br/>
+    <br/>
+    <br/>
   </body>
-
 
 </html>
