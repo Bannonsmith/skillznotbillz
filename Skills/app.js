@@ -153,28 +153,23 @@ app.post ('/add-skill', (req, res) => {
     categoryId: categoryid
   })
   skill.save().then((savedDescription) => {
-    // console.log(savedDescription)
   }).catch(function(err) {
-    // console.log(err)
   })
-  res.redirect("/user")
+  res.redirect("/show-users-skills")
 })
 
 
 app.post('/login', (req,res) => {
 
-  // console.log(req.body)
   let username = req.body.username
   let password = req.body.password
 
-  // console.log(username)
 
   models.User.findOne({
     where: {
       username: username
     }
   }).then(function(user) {
-    // console.log(user)
     if (user === null) {
       res.render("login", {message: "Invalid username or password!"})
     }
@@ -240,13 +235,12 @@ app.get('/tradeSkill/:id', (req,res) => {
         categoryId: id,
         userId: {
          [Op.ne]: req.session.user.id
-       } 
+       }
       },
       include: [{model: models.User, as: "Users"}]
     })
     .then((descriptions) => {
       descriptions.forEach((desc) => {
-        console.log(desc.dataValues.Users.dataValues.email)
       })
 
       let descriptionArray = descriptions.map((desc) => {
@@ -275,7 +269,6 @@ app.get('/updatechoice', (req,res) => {
 })
 
 app.get('/editchoice/:id',(req,res)=> {
-  console.log(req.params, 'it clicked')
   models.Description.findOne({
       where: {
         id : req.params.id
@@ -293,7 +286,7 @@ app.post('/updatechoice',(req,res)=>{
         id: req.body.descriptionId
       }
     })
-    res.redirect('/user')
+    res.redirect('/show-users-skills')
 })
 
 app.post('/deletepost',(req,res)=>{
@@ -302,7 +295,7 @@ app.post('/deletepost',(req,res)=>{
         id : req.body.postId
       }
     })
-    res.redirect('/home')
+    res.redirect('/show-users-skills')
 })
 
 
