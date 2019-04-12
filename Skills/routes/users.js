@@ -5,6 +5,7 @@ const models = require('../models')
 const sequelize = require('sequelize')
 const Op = sequelize.Op
 
+
 function isAuthenticated(req,res,next) {
     if (req.session.user) {
       next()

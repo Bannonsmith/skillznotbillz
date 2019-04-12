@@ -1,17 +1,23 @@
 <html>
 <head>
+<link rel="stylesheet" type="text/css" href="/updates.css">
 {{> header}}
 </head>
 <body>
-<h1>Edit Posts</h1>
+<div class="container">
+<h3 id="heading">Edit Posts</h3>
+<br/>
+<br/>
 {{#description}}
 <li>
 <form action="/users/updatechoice" method="POST">
-<textarea name="descriptionBody">{{body}}</textarea>
+<textarea id="area" name="descriptionBody">{{body}}</textarea>
+<br/>
 <input type="hidden" name="descriptionId" value="{{id}}" />
-<button type="submit">Update</button>
+<button class="btn btn-dark" type="submit">Update</button>
 </li>
 </form>
 {{/description}}
+</div>
 </body>
 </html>
