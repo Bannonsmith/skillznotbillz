@@ -134,14 +134,3 @@ padding: 10px;
   justify-content: center;
 }
 
-.register {
-  justify-content: center;
-  display: flex;
-  padding: 20%;
-}
-
-#butt {
-  margin: 0 auto;
-  width: 144px;
-  padding: 20px;
-}
