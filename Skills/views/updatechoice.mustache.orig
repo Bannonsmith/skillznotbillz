@@ -1,8 +1,11 @@
 <html>
 <head>
+<<<<<<< HEAD
   <link rel="stylesheet" type="text/css" href="/footer.css">
 
+=======
 <link rel="stylesheet" type="text/css" href="/updates.css">
+>>>>>>> master
 {{> header}}
 </head>
 <body>
