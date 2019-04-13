@@ -4,34 +4,44 @@
     <meta charset="utf-8">
     {{> header}}
     <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.3.1/css/bootstrap.min.css" integrity="sha384-ggOyR0iXCbMQv3Xipma34MD+dH/1fQ784/j6cY/iJTQUOhcWr7x9JvoRxT2MZw1T" crossorigin="anonymous">
-    <link rel="stylesheet" type="text/css" href="/style.css">
+    <link rel="stylesheet" type="text/css" href="/style.css /footer.css">
+    <link rel="stylesheet" type="text/css" href="/footer.css">
+    <link rel="stylesheet" type="text/css" href="/home.css">
+
+
   </head>
   <body>
     <br/>
     <br/>
     <br/>
-    <div class="">
+    <div id="welcometext">
       {{#user}}
         <p>Hello {{username}}, lets get started</p>
       {{/user}}
       <br/>
-      <br/>
-      <br/>
+
       <p>If you havent created a profile click the button below</p>
     </div>
     <br/>
     <br/>
-    <form action="/users/add-skill" method="POST">
-      {{#categories}}
-        <!-- <input type="hidden" name="category" value="{{id}}"> -->
-        <input type="radio" name="category" value = '{{id}}'><p>{{name}}</p>
-      {{/categories}}
-      <input type="text" name="description" value="" placeholder="description">
-      <button type="submit" name="button">submit</button>
-    </form>
+
+
+        <form action="/users/add-skill" method="POST">
+          <div class="container">
+
+            {{#categories}}
+
+                <input type="radio" name="category" value ='{{id}}'><p>{{name}}</p>
+
+            {{/categories}}
+          </div>
+
+            <input type="text" name="description" placeholder="Enter your description!">
+            <button type="submit" name="button">submit</button>
+        </form>
     <br/>
     <br/>
     <br/>
   </body>
-
+{{> footer}}
 </html>

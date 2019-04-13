@@ -33,6 +33,50 @@
   padding-right: 220px;
   }
 
+.navbar {
+  color: white;
+  /* background-color: black; */
+}
+.bg-dark {
+  background-color: #0000;
+}
+
+
+.btn {
+  /* flex-direction: row */
+  display: block;
+  float: initial;
+  margin-right: 2%;
+  margin-left: 2%;
+  font-size: 2px;
+
+}
+.btn-secondary:not(:disabled):not(.disabled).active {
+  /* display: flex; */
+}
+
+.container {
+  display: flex;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
+}
+
+#welcometext {
+  text-align: center;
+  justify-content: center;
+}
+
+#radiotext {
+  margin-left: 15px;
+}
+
+
+#submitbox {
+  display: flex;
+  justify-content: center;
+  margin-top: 10%;
+}
 
 /* Trade Page */
 
