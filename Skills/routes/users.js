@@ -5,7 +5,7 @@ const models = require('../models')
 const sequelize = require('sequelize')
 const Op = sequelize.Op
 
-
+  // Using the session to authenticated each page
 function isAuthenticated(req,res,next) {
     if (req.session.user) {
       next()
@@ -14,9 +14,8 @@ function isAuthenticated(req,res,next) {
       res.redirect('/login')
     }
   }
-
+ // Display the home page ad showing user name and categories
 router.get('/home', isAuthenticated, (req, res) => {
-    // console.log(req.session)
     models.Category.findAll().then(function(categories) {
     models.User.findOne({
       where: {
@@ -29,16 +28,14 @@ router.get('/home', isAuthenticated, (req, res) => {
   })
   })
 
-
+  // Display the user page
 router.get('/user', isAuthenticated, (req,res) =>{
-    // let id = req.params.userId
-    //
-    res.render('user')
 
+    res.render('user')
   })
 
-router.get("/show-users-skills", (req,res) => {
-    // console.log(req.session)
+    // Adding the categories and descritption to the user page
+router.get("/show-users-skills", isAuthenticated, (req,res) => {
   models.Description.findAll({
     where: {
       userId: req.session.user.id
@@ -50,27 +47,22 @@ router.get("/show-users-skills", (req,res) => {
       }
     ]
   }).then((descriptions) => {
-
-      console.log(descriptions)
-
       let descs = descriptions.map((desc) => {
         return {categoryName: desc.category.name,
            body: desc.body, userId: desc.userId,
            descriptionId: desc.id, categoryId: desc.category.id
           }
       })
-
-      console.log(descs)
-
       res.render('user',{descriptions: descs})
   })
 })
-
-router.get('/updatechoice', (req,res) => {
+  // Display the update page
+router.get('/updatechoice', isAuthenticated, (req,res) => {
     res.render('updatechoice')
   })
 
-router.get('/editchoice/:id',(req,res)=> {
+  // Update individual skills
+router.get('/editchoice/:id', isAuthenticated, (req,res)=> {
     models.Description.findOne({
         where: {
           id : req.params.id
@@ -79,7 +71,7 @@ router.get('/editchoice/:id',(req,res)=> {
         res.render('updatechoice', {description: description})
       })
   })
-
+    // Updates the datebase
   router.post('/updatechoice',(req,res)=>{
     models.Description.update({
         body: req.body.descriptionBody
@@ -90,7 +82,7 @@ router.get('/editchoice/:id',(req,res)=> {
       })
       res.redirect('show-users-skills')
   })
-
+    // Deletes the skills from the database
   router.post('/deletepost',(req,res)=>{
     models.Description.destroy({
         where: {
@@ -99,9 +91,14 @@ router.get('/editchoice/:id',(req,res)=> {
       })
       res.redirect('show-users-skills')
   })
-
+    // Adds the skill to the database and displaying information
   router.post ('/add-skill', (req, res) => {
     models.Category.findAll().then(function(categories) {
+      models.User.findOne({
+        where: {
+          username: req.session.user.username
+        }
+      }).then(function(user) {
     let description = req.body.description
     let categoryid = req.body.category
     let category = req.body.category
@@ -117,22 +114,22 @@ router.get('/editchoice/:id',(req,res)=> {
     }).catch(function(err) {
     }).then(function(){
 
-    res.render('home', {categories: categories, message: "You have successfully added a new skill",
+    res.render('home', {categories: categories, user: user, message: "You have successfully added a new skill",
      button: "If you would like to see/edit/update what you just submitted click the User button or if you want to begin trading skills click on the Trade button above."})
     })
   })
 })
-
-
+})
+    // Display the trade page with categories
   router.get('/trade', isAuthenticated, (req, res) =>{
     models.Category.findAll().then(function(categories) {
       res.render('trade', {categories: categories})
     })
   })
-
-  router.get('/tradeSkill/:id', (req,res) => {
+    // Display the invdidual skills upon clicking the categoties
+  router.get('/tradeSkill/:id', isAuthenticated, (req,res) => {
     let id = req.params.id
-
+    
     models.Category.findAll().then(function(categories) {
       models.Description.findAll({
         where : {
@@ -166,5 +163,5 @@ router.get('/editchoice/:id',(req,res)=> {
       })
     })
   })
-
+    // Connects this route with app.js
 module.exports = router
