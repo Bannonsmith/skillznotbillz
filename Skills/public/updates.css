@@ -17,13 +17,13 @@ li {
 
 #heading {
     padding-top: 25px;
-    color:rgb(80, 78, 78);
+    color:white;
     font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
 
 }
 
 body {
-    background-image: url("/media/violin.jpg");
+    background-image: url("/media/piano.jpg");
     background-size: cover;
 }
 
