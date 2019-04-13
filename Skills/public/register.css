@@ -6,11 +6,11 @@
     text-align:center;
 
   }
-  
+
 .register {
     justify-content: center;
     display: flex;
-    margin-top: 10%;
+    margin-top: 6%;
   }
 
 body {
@@ -20,4 +20,11 @@ body {
 
 .backG {
     color:white;
+
+}
+h1 {
+  color: white;
+  text-align: center;
+  padding-top: 35px;
+  margin-top: 25px;
 }

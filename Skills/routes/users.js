@@ -115,7 +115,7 @@ router.get('/editchoice/:id', isAuthenticated, (req,res)=> {
     }).then(function(){
 
     res.render('home', {categories: categories, user: user, message: "You have successfully added a new skill",
-     button: "If you would like to see/edit/update what you just submitted click the User button or if you want to begin trading skills click on the Trade button above."})
+     button: "If you would like to see/edit/update what you just submitted click the User Profile button above or if you want to begin trading skills click on the Trade Skills button above."})
     })
   })
 })
@@ -129,7 +129,7 @@ router.get('/editchoice/:id', isAuthenticated, (req,res)=> {
     // Display the invdidual skills upon clicking the categoties
   router.get('/tradeSkill/:id', isAuthenticated, (req,res) => {
     let id = req.params.id
-    
+
     models.Category.findAll().then(function(categories) {
       models.Description.findAll({
         where : {
