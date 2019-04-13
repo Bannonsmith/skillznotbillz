@@ -16,30 +16,29 @@ function isAuthenticated(req,res,next) {
   }
 
 router.get('/home', isAuthenticated, (req, res) => {
-    console.log(req.session)
+    // console.log(req.session)
     models.Category.findAll().then(function(categories) {
     models.User.findOne({
       where: {
         username: req.session.user.username
       }
     }).then(function(user) {
-  
+
       res.render('home', {user: user, categories: categories})
     })
   })
   })
-  
+
 
 router.get('/user', isAuthenticated, (req,res) =>{
     // let id = req.params.userId
     //
     res.render('user')
-  
+
   })
 
-router.get("/show-users-skills", (req,res) =>
-{
-    console.log(req.session)
+router.get("/show-users-skills", (req,res) => {
+    // console.log(req.session)
   models.Description.findAll({
     where: {
       userId: req.session.user.id
@@ -52,7 +51,7 @@ router.get("/show-users-skills", (req,res) =>
     ]
   }).then((descriptions) => {
 
-      // console.log(descriptions)
+      console.log(descriptions)
 
       let descs = descriptions.map((desc) => {
         return {categoryName: desc.category.name,
@@ -70,7 +69,7 @@ router.get("/show-users-skills", (req,res) =>
 router.get('/updatechoice', (req,res) => {
     res.render('updatechoice')
   })
-  
+
 router.get('/editchoice/:id',(req,res)=> {
     models.Description.findOne({
         where: {
@@ -80,7 +79,7 @@ router.get('/editchoice/:id',(req,res)=> {
         res.render('updatechoice', {description: description})
       })
   })
-  
+
   router.post('/updatechoice',(req,res)=>{
     models.Description.update({
         body: req.body.descriptionBody
@@ -91,7 +90,7 @@ router.get('/editchoice/:id',(req,res)=> {
       })
       res.redirect('show-users-skills')
   })
-  
+
   router.post('/deletepost',(req,res)=>{
     models.Description.destroy({
         where: {
@@ -100,13 +99,19 @@ router.get('/editchoice/:id',(req,res)=> {
       })
       res.redirect('show-users-skills')
   })
-  
+
   router.post ('/add-skill', (req, res) => {
     let description = req.body.description
     let categoryid = req.body.category
     let category = req.body.category
     let userId = req.session.user.id
-  
+    // console.log("bob")
+    // console.log(categoryid)
+    // console.log(req.body)
+    // console.log(description)
+    // console.log(category)
+    // console.log(userId)
+
     let skill = models.Description.build({
       body: description,
       userId: userId,
@@ -117,7 +122,7 @@ router.get('/editchoice/:id',(req,res)=> {
     }).then(function(){
         res.redirect("/users/show-users-skills")
     })
-    
+
   })
 
   router.get('/trade', isAuthenticated, (req, res) =>{
@@ -125,10 +130,10 @@ router.get('/editchoice/:id',(req,res)=> {
       res.render('trade', {categories: categories})
     })
   })
-  
+
   router.get('/tradeSkill/:id', (req,res) => {
     let id = req.params.id
-  
+
     models.Category.findAll().then(function(categories) {
       models.Description.findAll({
         where : {
@@ -142,7 +147,7 @@ router.get('/editchoice/:id',(req,res)=> {
       .then((descriptions) => {
         descriptions.forEach((desc) => {
         })
-  
+
         let descriptionArray = descriptions.map((desc) => {
           return {
             id: desc.dataValues.id,
@@ -156,12 +161,11 @@ router.get('/editchoice/:id',(req,res)=> {
           }
         })
         let category = categories[id -1].dataValues.name
-  
+
       res.render('trade', {descriptions: descriptionArray, categories: categories, category: category})
-  
+
       })
     })
   })
 
 module.exports = router
-

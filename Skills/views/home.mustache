@@ -16,28 +16,33 @@
     <br/>
     <div id="welcometext">
       {{#user}}
-        <p>Hello {{username}}, lets get started</p>
+        <h3>Hello {{username}}, lets get started<h3>
       {{/user}}
+      <h5>Fnd the category in which you have a skill, then click on the category
+        button below and type your descripion of that skill in the input field.</h5>
       <br/>
-
-      <p>If you havent created a profile click the button below</p>
     </div>
     <br/>
     <br/>
 
 
-        <form action="/users/add-skill" method="POST">
+        <form action="/users/add-skill" method="post">
           <div class="container">
 
             {{#categories}}
 
-                <input type="radio" name="category" value ='{{id}}'><p>{{name}}</p>
-
+              <label for="radio">
+               <input type="radio" id="radio" name="category" value ="{{id}}"><h4>{{name}}</h4>
+               </label>
+                <!-- <button type="button" name="category" id="tradebutton" class="btn btn-outline-light" value= "{{id}}">{{name}}</button> -->
             {{/categories}}
           </div>
+          <br><br><br><br>
+          <h3>When adding your skills use the format "I can teach you (skill) for (timeframe) every (how often)."</h3>
+          <h4>Example: "I can give you French lessons once a week for three weeks."</h4>
+            <input type="text" name="description" class="box" placeholder="Enter your description!">
+            <button type="submit" name="button">Submit</button>
 
-            <input type="text" name="description" placeholder="Enter your description!">
-            <button type="submit" name="button">submit</button>
         </form>
     <br/>
     <br/>
