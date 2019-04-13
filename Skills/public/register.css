@@ -1,0 +1,23 @@
+#regButton {
+    padding: 20px;
+    display: flex;
+    height: 90px;
+    justify-content: center;
+    text-align:center;
+
+  }
+  
+.register {
+    justify-content: center;
+    display: flex;
+    margin-top: 10%;
+  }
+
+body {
+    background-image: url("media/camera.jpg");
+    background-size: cover;
+  }
+
+.backG {
+    color:white;
+}
