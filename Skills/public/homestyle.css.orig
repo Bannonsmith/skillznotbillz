@@ -13,11 +13,14 @@ video {
     height: auto;
     z-index: -100;
     transform: translateX(-50%) translateY(-50%);
+<<<<<<< HEAD
   background-size: cover;
   transition: 1s opacity;
 }
 .stopfade {
    opacity: .5;
+=======
+>>>>>>> master
 }
 
 #polina {
@@ -61,12 +64,14 @@ a {
   text-decoration: none;
   background:rgba(0,0,0,0.5);
   padding: .5rem;
-  transition: .6s background;
 
 }
 a:hover{
   background:rgba(0,0,0,0.9);
 }
+<<<<<<< HEAD
 @media screen and (max-width: 500px) {
-    div{width:70%;}
+  div{width:70%;}
 }
+=======
+>>>>>>> master
