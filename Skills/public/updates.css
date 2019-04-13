@@ -1,0 +1,29 @@
+.container {
+    text-align: center;
+
+}
+
+li {
+    list-style: none;
+}
+
+#area {
+    height: 300px;
+    width:300px;
+    margin-bottom: 15px;
+    background-color: #f5efef;
+    text-align: center;
+}
+
+#heading {
+    padding-top: 25px;
+    color:rgb(80, 78, 78);
+    font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif;
+
+}
+
+body {
+    background-image: url("/media/violin.jpg");
+    background-size: cover;
+}
+

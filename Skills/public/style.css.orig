@@ -1,33 +1,34 @@
+/* Trade Page */
 
-/* Home Page */
-.home {
-  text-align: right;
-  font-size: 40px;
-  font-family: inherit;
-  margin-top: 20%;
-}
-.flex-container img {
-  width: 420px;
-  height: 487px;
-}
-.circle {
-  display: inline-block;
-  justify-content: center;
-  margin-left: auto;
-  margin-right: auto;
-  margin-left: 220px;
-  margin-right: 220px;
+#tradeheader {
+  text-align: center;
 }
 
-.flex-container {
+#tradebuttonbox {
+margin-left: 10%;
+margin-right: 10%;
+display: flex;
+flex-wrap: wrap;
+justify-content: center;
+padding: 10px;
+
+}
+
+#tradebutton {
+  padding: 10px;
+  margin: 5px;
+}
+
+.cardbox {
   display: flex;
-  flex-direction: row;
-}
-.pad {
-  padding: 40px;
-  font-size: 25px;
+  flex-wrap: wrap;
+  margin: auto;
+  justify-content: center;
+  text-align: center;
+  position: relative;
 }
 
+<<<<<<< HEAD
 .carousel  {
   padding-left: 220px;
   padding-right: 220px;
@@ -76,41 +77,11 @@
   display: flex;
   justify-content: center;
   margin-top: 10%;
-}
-
-/* Trade Page */
-
-#tradeheader {
-  text-align: center;
-}
-
-#tradebuttonbox {
-margin-left: 10%;
-margin-right: 10%;
-display: flex;
-flex-wrap: wrap;
-justify-content: center;
-padding: 10px;
-
-}
-
-#tradebutton {
-  padding: 10px;
-  margin: 5px;
-}
-
-.cardbox {
-  display: flex;
-  flex-wrap: wrap;
-  margin: auto;
-  justify-content: center;
-  text-align: center;
-  position: relative;
-}
-
+=======
 .card {
   margin: 1%;
   height: 445px;
+>>>>>>> master
 }
 
 .card a {

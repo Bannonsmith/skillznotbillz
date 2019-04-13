@@ -1,0 +1,46 @@
+#welcome {
+    text-align: center;
+    color: white;
+
+}
+
+.container {
+   
+    display: flex;
+    flex-wrap: wrap;
+    padding-top: 50px;
+    justify-content: center;
+    position: relative;
+    text-align: center;
+
+
+}
+
+.card {
+    margin: 1%;
+}
+
+body {
+    background-image: url("/media/art.jpg");
+    background-size: cover;
+    background-color: azure;
+   }
+
+.card a {
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    left: 40px;
+    width: 80px;
+    color: #f5efef;
+    
+  }
+
+  .card button {
+    position: absolute;
+    text-align: center;
+    bottom: 10px;
+    left: 160px;
+    width: 80px;
+    
+  }
