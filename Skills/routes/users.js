@@ -101,16 +101,12 @@ router.get('/editchoice/:id',(req,res)=> {
   })
 
   router.post ('/add-skill', (req, res) => {
+    models.Category.findAll().then(function(categories) {
     let description = req.body.description
     let categoryid = req.body.category
     let category = req.body.category
     let userId = req.session.user.id
-    // console.log("bob")
-    // console.log(categoryid)
-    // console.log(req.body)
-    // console.log(description)
-    // console.log(category)
-    // console.log(userId)
+
 
     let skill = models.Description.build({
       body: description,
@@ -120,10 +116,13 @@ router.get('/editchoice/:id',(req,res)=> {
     skill.save().then((savedDescription) => {
     }).catch(function(err) {
     }).then(function(){
-        res.redirect("/users/show-users-skills")
-    })
 
+    res.render('home', {categories: categories, message: "You have successfully added a new skill",
+     button: "If you would like to see/edit/update what you just submitted click the User button or if you want to begin trading skills click on the Trade button above."})
+    })
   })
+})
+
 
   router.get('/trade', isAuthenticated, (req, res) =>{
     models.Category.findAll().then(function(categories) {
