@@ -12,6 +12,7 @@ const VIEWS_PATH= path.join(__dirname, '/views');
 
 const sequelize = require('sequelize')
 const Op = sequelize.Op
+// const PORT = process.env.PORT || 8080
 
 app.use(session({
   secret: 'keyboard cat',
