@@ -1,7 +1,10 @@
-.nav-item {
+
+.nav a {
     color: white;
 }
-
-nav {
-    color: white;
+.nav-link {
+  color: white;
+}
+.navbar-custom {
+  background-color: #000000;
 }

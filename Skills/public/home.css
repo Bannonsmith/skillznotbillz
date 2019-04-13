@@ -11,7 +11,14 @@ input[type="radio"] {
   margin-right: 15px;
   margin-left: 15px;
 }
+.flex-container {
+  text-shadow:
+    -1px -1px 0 #000,
+    1px -1px 0 #000,
+    -1px 1px 0 #000,
+    1px 1px 0 #000
 
+}
 body {
   color: white;
   background-image: url("/media/reading.jpg");
@@ -19,11 +26,7 @@ body {
   background-size: cover;
   opacity: 1.5px;
   /* font-family: Agenda-Light, Agenda Light, Agenda, Arial Narrow, sans-serif; */
-  text-shadow:
-    -1px -1px 0 #000,
-    1px -1px 0 #000,
-    -1px 1px 0 #000,
-    1px 1px 0 #000
+
 }
 label {
   padding: 10px;
@@ -43,7 +46,7 @@ button {
   padding: 10px;
 }
 .success {
-  color: green;
+  color: #79ec2e;
   font-size: 20px;
   text-align: center;
 }

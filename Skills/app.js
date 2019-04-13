@@ -14,6 +14,7 @@ const sequelize = require('sequelize')
 const Op = sequelize.Op
 // const PORT = process.env.PORT || 8080
 
+// adding session
 app.use(session({
   secret: 'keyboard cat',
   resave: false,
@@ -42,7 +43,7 @@ function isAuthenticated(req,res,next) {
   }
 }
 
-
+  // Logging out
 app.post('/logout', function(req, res, next) {
  if (req.session) {
    req.session.destroy(function(err) {
@@ -50,22 +51,20 @@ app.post('/logout', function(req, res, next) {
        return next(err);
      } else {
        res.redirect('/login');
-       // console.log(user)
      }
    });
  }
 })
-
+  // Showing the login in page
 app.get('/logout',(req,res) =>{
  res.render('logout')
 })
 
-
+  // Logging into the app and checking the username and password to the database
 app.post('/login', (req,res) => {
 
   let username = req.body.username
   let password = req.body.password
-
 
   models.User.findOne({
     where: {
@@ -91,6 +90,7 @@ app.post('/login', (req,res) => {
   })
 })
 
+  // Register and encrypting the password
 app.post('/registration', (req,res) => {
   bcrypt.hash(req.body.password, saltRounds, function(err,hash) {
 
@@ -114,6 +114,7 @@ app.post('/registration', (req,res) => {
   })
   })
 
+  // Shows the pages of all these below
 app.post('/register',  (req,res) =>{
   res.redirect('/register')
 
@@ -133,15 +134,10 @@ app.get('/login', (req,res) => {
   res.render('login')
 })
 
-//users page
-
 app.get('/register', (req,res) => {
   res.render('register')
 })
 
-app.get('/exchange', (req,res) => {
-  res.render('exchange')
-})
 
 // Listen for server //
 
