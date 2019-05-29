@@ -13,10 +13,3 @@
 
 ![](SE.gif) 
 
-We made sure to encrypt User passwords in our Database using bcrypt:
-
-![](encryptedpw.png)
-
-Our team thought it would be a good idea to take advantage of express routes in order to keep our code organized. This code snippet shows how users update and delete their posts after they've been created:
-
-![](routes.png)
