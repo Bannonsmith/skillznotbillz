@@ -29,3 +29,8 @@ This is a video of an user adding skills to there account.
 
 ![](addskill2.gif)
 
+Video of a user editing and deleteting skills to there account.
+
+![](editanddelete.gif)
+
+
