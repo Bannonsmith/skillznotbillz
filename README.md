@@ -11,6 +11,10 @@
 
 **Project Contributors:** Ashley Mello, Bannon Smith, Lina Jimenez
 
+If you want to use the site without going through the registration you can use the username and password below:
+**Username: guest@gmail.com
+**Password: password
+
 ![](SE.gif) 
 
 We made sure to encrypt User passwords in our Database using bcrypt:
