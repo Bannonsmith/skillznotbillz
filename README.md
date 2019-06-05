@@ -27,5 +27,5 @@ Our team thought it would be a good idea to take advantage of express routes in 
 
 This is a video of an user adding skills to there account.
 
-![](addskills1.gif)
+![](addskills2.gif)
 
