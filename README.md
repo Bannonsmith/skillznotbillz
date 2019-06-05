@@ -42,3 +42,6 @@ Video of a user emailing the person with the skills that the user desires.
 ![](email.gif)
 
 
+**Future Features** Chat features among traders, The ability to earn points so that if the person who you are teaching has skills you are not interested in you can collect points to use with another trader. 
+
+
