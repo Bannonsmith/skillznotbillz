@@ -24,3 +24,8 @@ We made sure to encrypt User passwords in our Database using bcrypt:
 Our team thought it would be a good idea to take advantage of express routes in order to keep our code organized. This code snippet shows how users update and delete their posts after they've been created:
 
 ![](routes.png)
+
+This is a video of an user adding skills to there account.
+
+![](addskills.png)
+
