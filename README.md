@@ -33,4 +33,12 @@ Video of a user editing and deleteting skills to there account.
 
 ![](editanddelete.gif)
 
+Video of a user displaying tradeable skills to their account.
+
+![](editanddelete.gif)
+
+Video of a user emailing the person with the skills that the user desires.
+
+![](email.gif)
+
 
